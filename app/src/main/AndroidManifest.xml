@@ -11,7 +11,6 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <activity
             android:name=".SingleLectureActivity"
             android:label="@string/title_activity_single_lecture"
@@ -20,11 +19,30 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
+
+        </activity>
+        <activity
+            android:name=".FirstYearActivity"
+            android:label="@string/title_activity_first_year" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".SecondYearActivity"
+            android:label="@string/title_activity_second_year" >
+
+
+        </activity>
+        <activity
+            android:name=".ThirdYearActivity"
+            android:label="@string/title_activity_third_year" >
+        </activity>
+        <activity
+            android:name=".FourthYearActivity"
+            android:label="@string/title_activity_fourth_year" >
         </activity>
     </application>
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -23,31 +23,127 @@
 
     <!-- Email label -->
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/announcementTitle"
+        android:id="@+id/textView1"
         android:paddingBottom="2dip"
-        android:textColor="#acacac" />
+        android:textColor="#444"
+        android:text="Title: "
+        android:textSize="20sp"
+        android:layout_gravity="left" />
 
-    <!-- Mobile number label -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/announcementTitle"
+            android:paddingBottom="2dip"
+            android:textColor="#acacac"
+            android:layout_alignParentEnd="false"
+            android:layout_toRightOf="@+id/textView1"
+            android:textSize="20dip"
+            android:layout_marginLeft="15dip" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/announcementContent"
-        android:gravity="left"
-        android:textColor="#5d5d5d"
-        android:textStyle="bold" />
+        android:id="@+id/textView2"
+        android:paddingBottom="2dip"
+        android:textColor="#444"
+        android:text="Content: "
+        android:textSize="20sp"
+        android:layout_gravity="left"
+        android:layout_below="@+id/announcementTitle" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/announcementContent"
+            android:gravity="left"
+            android:textColor="#5d5d5d"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/textView2"
+            android:textSize="20sp"
+            android:layout_marginLeft="15dip"
+            android:layout_below="@+id/announcementTitle"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/publishedDate"
-        />
+        android:id="@+id/textView3"
+        android:paddingBottom="2dip"
+        android:textColor="#444"
+        android:text="Published Date: "
+        android:textSize="20sp"
+        android:layout_gravity="left"
+        android:layout_below="@+id/announcementContent"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/publishedDate"
+            android:layout_toRightOf="@+id/textView3"
+            android:textSize="20sp"
+            android:layout_marginLeft="15dip"
+            android:layout_below="@+id/announcementContent" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/deadlineDate"
-        />
+        android:id="@+id/textView4"
+        android:paddingBottom="2dip"
+        android:textColor="#444"
+        android:text="Deadline Date: "
+        android:textSize="20sp"
+        android:layout_gravity="left"
+        android:layout_below="@+id/publishedDate" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/deadlineDate"
+            android:layout_below="@+id/publishedDate"
+            android:layout_toRightOf="@+id/textView4"
+            android:textSize="20sp"
+            android:layout_marginLeft="15dip" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5"
+        android:paddingBottom="2dip"
+        android:textColor="#444"
+        android:text="User ID: "
+        android:textSize="20sp"
+        android:layout_gravity="left"
+        android:layout_below="@+id/deadlineDate" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/userIDArea"
+            android:layout_below="@+id/deadlineDate"
+            android:layout_toRightOf="@+id/textView5"
+            android:textSize="20sp"
+            android:layout_marginLeft="15dip" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView6"
+        android:paddingBottom="2dip"
+        android:textColor="#444"
+        android:text="Lecture ID: "
+        android:textSize="20sp"
+        android:layout_gravity="left"
+        android:layout_below="@+id/userIDArea" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lectureIDArea"
+            android:layout_toRightOf="@+id/textView6"
+            android:textSize="20sp"
+            android:layout_marginLeft="15dip"
+            android:layout_below="@+id/userIDArea" />
+
+</RelativeLayout>

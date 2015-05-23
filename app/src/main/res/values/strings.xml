@@ -11,5 +11,9 @@
     <string name="title_activity_single_lecture">SingleLectureActivity</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_first_year">FirstYearActivity</string>
+    <string name="title_activity_second_year">SecondYearActivity</string>
+    <string name="title_activity_third_year">ThirdYearActivity</string>
+    <string name="title_activity_fourth_year">FourthYearActivity</string>
 
 </resources>

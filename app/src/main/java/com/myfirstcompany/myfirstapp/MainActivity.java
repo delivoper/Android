@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CheckBox;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -40,17 +41,18 @@ public class MainActivity extends ListActivity {
     private static String url = "http://188.166.44.115/api/show";
 
     JSONArray announcements = null;
-
     ArrayList<HashMap<String, String>> contactList;
-
     List<NameValuePair> params = new ArrayList<NameValuePair>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        params.add(new BasicNameValuePair("lecture", "com252"));
+
+        params.add(new BasicNameValuePair("lecture", "com234"));
+//        params.add(new BasicNameValuePair("lecture", "com240"));
 
         contactList = new ArrayList<HashMap<String, String>>();
 
@@ -83,37 +85,6 @@ public class MainActivity extends ListActivity {
         new GetContacts().execute();
     }
 
-//    public void getData(View view) {
-//        new GetContacts().execute();
-//    }
-
-
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-
-        getMenuInflater().inflate(R.menu.menu_http_example, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void getData(View view){
-        new DownloadWebpageTask(this, textView).execute(link);
-    }*/
-
-/*    public void getData(View view){
-        new GetContacts(this, textView).execute(link);
-    }*/
-
     private class GetContacts extends AsyncTask<Void, Void, Void> {
 
         @Override
@@ -124,7 +95,6 @@ public class MainActivity extends ListActivity {
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
-
         }
 
         @Override
@@ -133,7 +103,11 @@ public class MainActivity extends ListActivity {
             ServiceHandler sh = new ServiceHandler();
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET, params);
+            //String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
+            //String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET, params);
+
+            //String jsonStr = sh.downloadUrl(url);
+            String jsonStr = sh.downloadUrl(url, params);
 
             Log.d("Response: ", "> " + jsonStr);
 
@@ -194,10 +168,12 @@ public class MainActivity extends ListActivity {
             ListAdapter adapter = new SimpleAdapter(
                     MainActivity.this, contactList,
                     R.layout.list_item, new String[] { TAG_TITLE,
-                    TAG_CONTENT, TAG_PUBLISH_DATE, TAG_DEADLINE_DATE },
+                    TAG_CONTENT, TAG_PUBLISH_DATE, TAG_DEADLINE_DATE,
+                    TAG_USER_ID, TAG_LECTURE_ID },
                     new int[] {
                     R.id.announcementTitle, R.id.announcementContent,
-                    R.id.publishedDate, R.id.deadlineDate });
+                    R.id.publishedDate, R.id.deadlineDate, R.id.userIDArea,
+                    R.id.lectureIDArea });
 
             setListAdapter(adapter);
         }
