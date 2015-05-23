@@ -26,6 +26,7 @@ import java.util.List;
 
 public class MainActivity extends ListActivity {
 
+    // json daki node lar için
     public static final String TAG_TITLE = "title";
     public static final String TAG_CONTENT = "content";
     public static final String TAG_PUBLISH_DATE = "created_at";
@@ -37,11 +38,12 @@ public class MainActivity extends ListActivity {
     private static final String TAG_USER_ID = "user_id";
 
     private ProgressDialog pDialog;
+    private DBHelper db;
 
     private static String url = "http://188.166.44.115/api/show";
 
     JSONArray announcements = null;
-    ArrayList<HashMap<String, String>> contactList;
+    ArrayList<HashMap<String, String>> announcementList;
     List<NameValuePair> params = new ArrayList<NameValuePair>();
 
 
@@ -50,11 +52,22 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        db = new DBHelper(this);
 
-        params.add(new BasicNameValuePair("lecture", "com234"));
-//        params.add(new BasicNameValuePair("lecture", "com240"));
+        ArrayList paramsList = new ArrayList();
+        paramsList = db.getAllCodes();
 
-        contactList = new ArrayList<HashMap<String, String>>();
+        // burada local database den seçili ders kodlarını alıcaz ve parametrelere ekliyoruz
+        for(int i=0; i<paramsList.size(); i++){
+            if(paramsList.get(i) != null) {
+                params.add(new BasicNameValuePair("lecture[]", (String) paramsList.get(i)));
+            }
+        }
+
+//        params.add(new BasicNameValuePair("lecture[]", "com252"));
+//        params.add(new BasicNameValuePair("lecture[]", "com240"));
+
+        announcementList = new ArrayList<HashMap<String, String>>();
 
         ListView lv = getListView();
 
@@ -73,6 +86,8 @@ public class MainActivity extends ListActivity {
                 String dlinedate = ((TextView) view.findViewById(R.id.deadlineDate))
                         .getText().toString();
 
+                // bir duyuruya tıklandığında o duyurunun ayrıntılarını gösterecek sayfa
+                // Single Lecture Activity
                 Intent in = new Intent(getApplicationContext(), SingleLectureActivity.class);
 //                in.putExtra(TAG_CODE, code);
                 in.putExtra(TAG_TITLE, title);
@@ -82,10 +97,10 @@ public class MainActivity extends ListActivity {
                 startActivity(in);
             }
         });
-        new GetContacts().execute();
+        new GetAnnouncements().execute();
     }
 
-    private class GetContacts extends AsyncTask<Void, Void, Void> {
+    private class GetAnnouncements extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -102,10 +117,6 @@ public class MainActivity extends ListActivity {
             // Creating service handler class instance
             ServiceHandler sh = new ServiceHandler();
 
-            // Making a request to url and getting response
-            //String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
-            //String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET, params);
-
             //String jsonStr = sh.downloadUrl(url);
             String jsonStr = sh.downloadUrl(url, params);
 
@@ -118,6 +129,7 @@ public class MainActivity extends ListActivity {
                     // Getting JSON Array node
                     //announcements = jsonArr.getJSONObject();
 
+                    // JSON PARSE
                     // looping through All Contacts
                     for (int i = 0; i < announcements.length(); i++) {
                         JSONObject c = announcements.getJSONObject(i);
@@ -144,7 +156,8 @@ public class MainActivity extends ListActivity {
                         announcement.put(TAG_LECTURE_ID, lectureid);
 
                         // adding contact to contact list
-                        contactList.add(announcement);
+                        announcementList.add(announcement);
+                        Log.d("Announcement List: ",">" +  announcementList);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -166,7 +179,7 @@ public class MainActivity extends ListActivity {
              * Updating parsed JSON data into ListView
              * */
             ListAdapter adapter = new SimpleAdapter(
-                    MainActivity.this, contactList,
+                    MainActivity.this, announcementList,
                     R.layout.list_item, new String[] { TAG_TITLE,
                     TAG_CONTENT, TAG_PUBLISH_DATE, TAG_DEADLINE_DATE,
                     TAG_USER_ID, TAG_LECTURE_ID },

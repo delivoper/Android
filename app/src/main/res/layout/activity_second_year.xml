@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="COM240"
-        android:id="@+id/com240_2"
+        android:id="@+id/chkBoxCom240"
         android:layout_alignParentEnd="false"
         android:enabled="true"
         android:checked="false"
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="COM252"
-        android:id="@+id/com252_2"
+        android:id="@+id/chkBoxCom252"
         android:layout_alignParentEnd="false"
         android:enabled="true"
         android:checked="false"
@@ -33,5 +33,12 @@
         android:textColor="#444"
         android:layout_marginLeft="30dp"
         android:onClick="onCheckBoxClicked" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dip"
+        android:text="Tüm Kayıtları Sil"
+        android:onClick="deleteAllRecords" />
 
 </LinearLayout>

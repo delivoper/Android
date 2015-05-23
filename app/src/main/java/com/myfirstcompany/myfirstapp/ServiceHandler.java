@@ -27,55 +27,9 @@ import java.util.List;
  */
 public class ServiceHandler {
 
-/*    static String response = null;
-    public final static int GET = 1;
-    public final static int POST = 2;*/
-
     public ServiceHandler(){
 
     }
-
-/*    public String makeServiceCall(String url, int method) {
-        return this.makeServiceCall(url, method, null);
-    }
-
-    public String makeServiceCall(String url, int method, List<NameValuePair> params) {
-        try {
-            DefaultHttpClient httpClient = new DefaultHttpClient();
-            HttpEntity httpEntity = null;
-            HttpResponse httpResponse = null;
-
-            if (method == POST) {
-                HttpPost httpPost = new HttpPost(url);
-                if (params != null) {
-                    httpPost.setEntity(new UrlEncodedFormEntity(params));
-                }
-
-                httpResponse = httpClient.execute(httpPost);
-            } else if (method == GET) {
-                if (params != null) {
-                    String paramString = URLEncodedUtils.format(params, "utf-8");
-                    Log.d("ParamString: ", "> " + paramString);
-                    url = url + "?" + paramString;
-                    //url = url + "?" + "lecture=" + "com240";
-                }
-                HttpGet httpGet = new HttpGet(url);
-
-                httpResponse = httpClient.execute(httpGet);
-            }
-            httpEntity = httpResponse.getEntity();
-            response = EntityUtils.toString(httpEntity);
-
-        }   catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }   catch (ClientProtocolException e) {
-            e.printStackTrace();
-        }   catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return response;
-    }*/
 
     InputStream is = null;
     BufferedReader reader = null;
