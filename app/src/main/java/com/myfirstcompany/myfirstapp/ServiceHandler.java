@@ -74,7 +74,6 @@ public class ServiceHandler {
         } catch(IOException e) {
             return new String("Exception: " + e.getMessage());
         }
-
     }
 
 }

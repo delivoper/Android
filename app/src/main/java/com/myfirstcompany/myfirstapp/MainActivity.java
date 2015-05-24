@@ -19,9 +19,13 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 
 public class MainActivity extends ListActivity {
@@ -37,6 +41,12 @@ public class MainActivity extends ListActivity {
     private static final String TAG_UPDATE = "updated_at";
     private static final String TAG_USER_ID = "user_id";
 
+    private String TAG_PUBLISH_DATE_CLOCK = "created_clock";
+    private String TAG_PUBLISH_DATE_MIN = "created_min_date";
+
+    private String TAG_DEADLINE_DATE_CLOCK = "deadline_clock";
+    private String TAG_DEADLINE_DATE_MIN = "deadline_min_date";
+
     private ProgressDialog pDialog;
     private DBHelper db;
 
@@ -45,6 +55,8 @@ public class MainActivity extends ListActivity {
     JSONArray announcements = null;
     ArrayList<HashMap<String, String>> announcementList;
     List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+    DateHandler dhandler = new DateHandler();
 
 
     @Override
@@ -146,12 +158,35 @@ public class MainActivity extends ListActivity {
                         // tmp hashmap for single contact
                         HashMap<String, String> announcement = new HashMap<String, String>();
 
+                        dhandler.setDateObject(pubdate);
+                        Date pubDateObject = dhandler.getDateObject();
+                        String pubDateClockString = dhandler.getClock(pubDateObject);
+                        String pubDateString = dhandler.getDate(pubDateObject);
+
+                        dhandler.setDateObject(deadline);
+                        Date deadlineObject = dhandler.getDateObject();
+                        String deadlineClockString = dhandler.getClock(deadlineObject);
+                        String deadlineDateString = dhandler.getDate(deadlineObject);
+
+/*                        Log.d("PUBDATEOBJECT",">" + pubDateObject);
+                        Log.d("GET CLOCK: ",">" + dhandler.getClock(pubDateObject));
+                        Log.d("PUBDATEOBJECT",">" + pubDateObject);
+                        Log.d("GET DATE: ", ">" + dhandler.getDate(pubDateObject));
+                        Log.d("PUBDATEOBJECT",">" + pubDateObject);*/
+
                         // adding each child node to HashMap key => value
                         announcement.put(TAG_POST_ID, id);
                         announcement.put(TAG_TITLE, title);
                         announcement.put(TAG_CONTENT, content);
+
                         announcement.put(TAG_DEADLINE_DATE, deadline);
+                        announcement.put(TAG_DEADLINE_DATE_CLOCK, deadlineClockString);
+                        announcement.put(TAG_DEADLINE_DATE_MIN, deadlineDateString);
+
                         announcement.put(TAG_PUBLISH_DATE, pubdate);
+                        announcement.put(TAG_PUBLISH_DATE_CLOCK, pubDateClockString);
+                        announcement.put(TAG_PUBLISH_DATE_MIN, pubDateString);
+
                         announcement.put(TAG_USER_ID, userid);
                         announcement.put(TAG_LECTURE_ID, lectureid);
 
@@ -181,12 +216,14 @@ public class MainActivity extends ListActivity {
             ListAdapter adapter = new SimpleAdapter(
                     MainActivity.this, announcementList,
                     R.layout.list_item, new String[] { TAG_TITLE,
-                    TAG_CONTENT, TAG_PUBLISH_DATE, TAG_DEADLINE_DATE,
+                    TAG_CONTENT, TAG_PUBLISH_DATE_MIN, TAG_PUBLISH_DATE_CLOCK,
+                    TAG_DEADLINE_DATE_MIN, TAG_DEADLINE_DATE_CLOCK,
                     TAG_USER_ID, TAG_LECTURE_ID },
                     new int[] {
-                    R.id.announcementTitle, R.id.announcementContent,
-                    R.id.publishedDate, R.id.deadlineDate, R.id.userIDArea,
-                    R.id.lectureIDArea });
+                            R.id.announcementTitle, R.id.announcementContent,
+                            R.id.publishedDateMinArea, R.id.publishedDateClockArea,
+                            R.id.deadlineDateMinArea, R.id.deadlineDateClockArea, R.id.userIDArea,
+                            R.id.lectureIDArea });
 
             setListAdapter(adapter);
         }

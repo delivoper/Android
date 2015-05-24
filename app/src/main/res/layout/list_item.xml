@@ -78,13 +78,23 @@
         android:layout_below="@+id/announcementContent"/>
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/publishedDate"
+            android:id="@+id/publishedDateMinArea"
             android:layout_toRightOf="@+id/textView3"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:layout_marginLeft="15dip"
             android:layout_below="@+id/announcementContent" />
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/publishedDateClockArea"
+                android:layout_toRightOf="@+id/publishedDateMinArea"
+                android:textSize="14sp"
+                android:layout_marginLeft="15dip"
+                android:layout_marginTop="2dip"
+                android:layout_below="@+id/announcementContent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -95,15 +105,24 @@
         android:text="Deadline Date: "
         android:textSize="20sp"
         android:layout_gravity="left"
-        android:layout_below="@+id/publishedDate" />
+        android:layout_below="@+id/textView3" />
 
         <TextView
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/deadlineDate"
-            android:layout_below="@+id/publishedDate"
+            android:id="@+id/deadlineDateMinArea"
+            android:layout_below="@+id/textView3"
             android:layout_toRightOf="@+id/textView4"
-            android:textSize="20sp"
+            android:textSize="16sp"
+            android:layout_marginLeft="15dip" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/deadlineDateClockArea"
+            android:layout_below="@+id/textView3"
+            android:layout_toRightOf="@+id/deadlineDateMinArea"
+            android:textSize="14sp"
             android:layout_marginLeft="15dip" />
 
     <TextView
@@ -115,13 +134,13 @@
         android:text="User ID: "
         android:textSize="20sp"
         android:layout_gravity="left"
-        android:layout_below="@+id/deadlineDate" />
+        android:layout_below="@+id/textView4" />
 
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/userIDArea"
-            android:layout_below="@+id/deadlineDate"
+            android:layout_below="@+id/textView4"
             android:layout_toRightOf="@+id/textView5"
             android:textSize="20sp"
             android:layout_marginLeft="15dip" />
